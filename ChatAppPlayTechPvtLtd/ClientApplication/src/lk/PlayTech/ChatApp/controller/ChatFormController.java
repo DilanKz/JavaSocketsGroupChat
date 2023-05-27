@@ -13,6 +13,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -22,13 +23,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 
-public class ChatFormController {
+public class ChatFormController implements Initializable {
 
+    public TextField txtLogin;
+    public Button btnLogin;
+    public Pane loginPane;
     @FXML
     private ResourceBundle resources;
 
@@ -58,28 +63,25 @@ public class ChatFormController {
     DataOutputStream dataOutputStream;
     String imageFilePath;
 
-    @FXML
-    void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         setHeight();
         new Thread(() -> {
-            createSocket();
-        });
+            try {
+
+                socket = new Socket("localhost", 3000);
+
+                dataInputStream = new DataInputStream(socket.getInputStream());
+                dataOutputStream = new DataOutputStream(socket.getOutputStream());
+
+                dataFilter();
+
+            }catch (IOException ioException){
+                System.out.println(ioException.getMessage());
+            }
+        }).start();
     }
 
-    void createSocket(){
-        try {
-
-            socket = new Socket("localhost", 3000);
-
-            dataInputStream = new DataInputStream(socket.getInputStream());
-            dataOutputStream = new DataOutputStream(socket.getOutputStream());
-
-            dataFilter();
-
-        }catch (IOException ioException){
-            System.out.println(ioException.getMessage());
-        }
-    }
 
     void dataFilter(){
         try {
@@ -124,7 +126,7 @@ public class ChatFormController {
 
 
             String projectDir = System.getProperty("user.dir");
-            imageFilePath=projectDir+"ClientApplication\\src\\lk\\PlayTech\\ChatApp\\data\\images" + randomNumber + ".jpg";
+            imageFilePath=projectDir+"\\ClientApplication\\src\\lk\\PlayTech\\ChatApp\\data\\images" + randomNumber + ".jpg";
 
             File receivedImage = new File(imageFilePath);
             boolean isImageReceived = false;
@@ -271,6 +273,7 @@ public class ChatFormController {
     void btnSendOnClick(MouseEvent event) throws Exception {
         String msg=txtMsg.getText();
 
+
         // Send the data type
         dataOutputStream.writeUTF("TEXT");
         dataOutputStream.flush();
@@ -302,6 +305,18 @@ public class ChatFormController {
     @FXML
     void txtMsgOnAction(ActionEvent event) {
         btnSend.fire();
+    }
+
+    @FXML
+    void txtLoginOnAction(ActionEvent actionEvent) {
+        btnLogin.fire();
+    }
+
+    @FXML
+    void btnLoginOnAction(ActionEvent actionEvent) throws Exception{
+        loginPane.setVisible(false);
+        dataOutputStream.writeUTF("#AA77FF`"+txtLogin.getText());
+        dataOutputStream.flush();
     }
 }
 
