@@ -1,12 +1,14 @@
 package lk.PlayTech.ChatApp.util;
 
+import lk.PlayTech.ChatApp.Server;
+
 import java.io.*;
 import java.net.Socket;
 
 public class MultiClientHandler extends Thread{
     private Socket clientSocket;
     DataOutputStream dataOutputStream;
-    String userName;
+    public String userName;
 
     public MultiClientHandler(Socket socket,String userName) {
         this.clientSocket = socket;

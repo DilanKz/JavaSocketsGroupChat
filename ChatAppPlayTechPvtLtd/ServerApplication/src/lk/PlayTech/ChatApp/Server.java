@@ -1,4 +1,6 @@
-package lk.PlayTech.ChatApp.util;
+package lk.PlayTech.ChatApp;
+
+import lk.PlayTech.ChatApp.util.MultiClientHandler;
 
 import java.io.DataInputStream;
 import java.io.File;
