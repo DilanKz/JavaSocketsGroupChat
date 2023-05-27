@@ -6,8 +6,8 @@ import java.io.*;
 import java.net.Socket;
 
 public class MultiClientHandler extends Thread{
-    private Socket clientSocket;
-    DataOutputStream dataOutputStream;
+    public Socket clientSocket;
+    public DataOutputStream dataOutputStream;
     public String userName;
 
     public MultiClientHandler(Socket socket,String userName) {
@@ -34,7 +34,8 @@ public class MultiClientHandler extends Thread{
 
                     Server.broadcastMessage(this.userName,message);
                 }else {
-                    String imageFilePath = "E:\\IJSE\\IT2\\ChatApp\\ClientSide2\\src\\data\\images\\image.jpg";
+                    String projectDir = System.getProperty("user.dir");
+                    String imageFilePath = projectDir+"\\ServerApplication\\src\\lk\\PlayTech\\ChatApp\\data\\image.jpg";
                     File receivedImage = new File(imageFilePath);
 
                     try (FileOutputStream fileOutputStream = new FileOutputStream(receivedImage)) {
