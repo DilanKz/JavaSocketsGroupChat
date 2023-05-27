@@ -2,3 +2,5 @@
 ChatAppPlayTechPvtLtd/ServerApplication/ServerApplication.iml
 ChatAppPlayTechPvtLtd/ClientApplication/ClientApplication.iml
 ChatAppPlayTechPvtLtd/.idea/vcs.xml
+*.class
+ChatAppPlayTechPvtLtd/.idea/inspectionProfiles/Project_Default.xml
