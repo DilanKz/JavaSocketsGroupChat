@@ -5,10 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
 public class ChatApplication extends Application {
+
+    public static Stage stage;
 
     public static void main(String[] args) {
         launch(args);
@@ -20,7 +23,9 @@ public class ChatApplication extends Application {
         Scene scene =new Scene(root);
 
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
-        primaryStage.show();
+        primaryStage.initStyle(StageStyle.DECORATED);
+//        primaryStage.setResizable(false);
+        stage=primaryStage;
+        stage.show();
     }
 }
