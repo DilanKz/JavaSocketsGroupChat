@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -46,6 +47,8 @@ public class ChatFormController implements Initializable {
     public AnchorPane mainPain;
     public Pane navPane;
     public Pane notificationPane;
+    public SVGPath svgBell;
+    public Label lblNotiCount;
     @FXML
     private ResourceBundle resources;
 
@@ -74,10 +77,12 @@ public class ChatFormController implements Initializable {
     DataInputStream dataInputStream;
     DataOutputStream dataOutputStream;
     String imageFilePath;
+    int notificationCount=0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setHeight();
+        setNotificationCount();
         new Thread(() -> {
             try {
 
@@ -94,14 +99,26 @@ public class ChatFormController implements Initializable {
         }).start();
     }
 
+    void setNotificationCount(){
+        if (notificationCount!=0){
+            svgBell.setVisible(true);
+            lblNotiCount.setText(" "+notificationCount+" ");
+        }else {
+            svgBell.setVisible(false);
+            lblNotiCount.setText("");
+        }
+    }
+
 
     void dataFilter(){
         try {
             while (true) {
                 String dataType = dataInputStream.readUTF();
                 if (dataType.equals("IMAGE")) {
+                    notificationCount++;
                     receiveImages();
                 } else {
+                    notificationCount++;
                     receiveTextMessages();
                 }
             }
@@ -349,6 +366,7 @@ public class ChatFormController implements Initializable {
         String arrowDown="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z";
 
         if (btnResizeSvg.getContent().equals(arrowUp)){
+            notificationCount=10;
             btnResizeSvg.setContent(arrowDown);
             //Changing the size of the anchor pane
             ChatApplication.stage.setHeight(150);
@@ -358,6 +376,7 @@ public class ChatFormController implements Initializable {
 
 
         } else if (btnResizeSvg.getContent().equals(arrowDown)){
+            notificationCount=10;
             btnResizeSvg.setContent(arrowUp);
             /*mainPain.setPrefWidth(750);
             mainPain.setPrefHeight(820);*/
