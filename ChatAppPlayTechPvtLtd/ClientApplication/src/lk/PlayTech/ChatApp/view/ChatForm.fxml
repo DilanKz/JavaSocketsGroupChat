@@ -2,34 +2,54 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="784.0" prefWidth="762.0" style="-fx-background-color: #F9F5F6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.PlayTech.ChatApp.controller.ChatFormController">
+<AnchorPane fx:id="mainPain" prefHeight="820.0" prefWidth="762.0" style="-fx-background-color: #F9F5F6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.PlayTech.ChatApp.controller.ChatFormController">
    <children>
-      <ScrollPane fx:id="msgBodyPane" layoutX="18.0" layoutY="25.0" prefHeight="586.0" prefWidth="724.0" style="-fx-background-color: #F9F5F6;">
+      <ScrollPane fx:id="msgBodyPane" layoutX="18.0" layoutY="56.0" prefHeight="583.0" prefWidth="724.0" style="-fx-background-color: #F9F5F6;">
         <content>
            <VBox fx:id="msgBox" prefHeight="580.0" prefWidth="700.0" />
         </content>
       </ScrollPane>
-      <Pane layoutX="18.0" layoutY="635.0" prefHeight="135.0" prefWidth="724.0" style="-fx-background-color: #e1dede; -fx-border-radius: 10px; -fx-background-radius: 15px;">
+      <Pane layoutX="18.0" layoutY="659.0" prefHeight="135.0" prefWidth="724.0" style="-fx-background-color: #e1dede; -fx-border-radius: 10px; -fx-background-radius: 15px;">
          <children>
             <JFXButton fx:id="btnFiles" layoutX="81.0" layoutY="80.0" onMouseClicked="#btnFilesOnClick" prefHeight="31.0" prefWidth="31.0" style="-fx-background-radius: 50%;" text=" " />
             <JFXButton fx:id="btnEmoji" layoutX="20.0" layoutY="79.0" onMouseClicked="#btnEmojiOnClick" prefHeight="31.0" prefWidth="31.0" style="-fx-background-radius: 50%;" text=" " />
             <TextField fx:id="txtMsg" layoutX="14.0" layoutY="24.0" onAction="#txtMsgOnAction" prefHeight="44.0" prefWidth="704.0" promptText="Type a message" style="-fx-background-color: #e1dede; -fx-text-fill: #5B5656;" />
             <SVGPath content="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm177.6 62.1C192.8 334.5 218.8 352 256 352s63.2-17.5 78.4-33.9c9-9.7 24.2-10.4 33.9-1.4s10.4 24.2 1.4 33.9c-22 23.8-60 49.4-113.6 49.4s-91.7-25.5-113.6-49.4c-9-9.7-8.4-24.9 1.4-33.9s24.9-8.4 33.9 1.4zM144.4 208a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm192-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" disable="true" fill="#949393" layoutX="-221.0" layoutY="-160.0" scaleX="0.05" scaleY="0.05" />
-            <Button fx:id="btnSend" alignment="BOTTOM_LEFT" layoutX="654.0" layoutY="67.0" mnemonicParsing="false" onMouseClicked="#btnSendOnClick" prefHeight="52.0" prefWidth="52.0" style="-fx-background-color: #7FCD91; -fx-background-radius: 50%;" />
-            <SVGPath blendMode="MULTIPLY" content="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4zM498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z" disable="true" fill="#8d8d8d" layoutX="422.0" layoutY="-163.0" scaleX="0.04" scaleY="0.04" />
+            <Button fx:id="btnSend" alignment="BOTTOM_LEFT" layoutX="654.0" layoutY="67.0" mnemonicParsing="false" onMouseClicked="#btnSendOnClick" prefHeight="52.0" prefWidth="52.0" style="-fx-background-color: #1F8A70; -fx-background-radius: 50%;" />
+            <SVGPath content="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4zM498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z" disable="true" fill="#ebebeb" layoutX="422.0" layoutY="-163.0" scaleX="0.04" scaleY="0.04" />
             <SVGPath content="M364.2 83.8c-24.4-24.4-64-24.4-88.4 0l-184 184c-42.1 42.1-42.1 110.3 0 152.4s110.3 42.1 152.4 0l152-152c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-152 152c-64 64-167.6 64-231.6 0s-64-167.6 0-231.6l184-184c46.3-46.3 121.3-46.3 167.6 0s46.3 121.3 0 167.6l-176 176c-28.6 28.6-75 28.6-103.6 0s-28.6-75 0-103.6l144-144c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-144 144c-6.7 6.7-6.7 17.7 0 24.4s17.7 6.7 24.4 0l176-176c24.4-24.4 24.4-64 0-88.4z" disable="true" fill="#949393" layoutX="-129.0" layoutY="-162.0" scaleX="0.05" scaleY="0.05" />
          </children></Pane>
-      <Pane fx:id="loginPane" prefHeight="784.0" prefWidth="762.0" style="-fx-background-color: #F9F5F6;">
+      <Pane fx:id="navPane" layoutX="7.0" layoutY="7.0" prefHeight="31.0" prefWidth="750.0" style="-fx-background-color: #00425A; -fx-background-radius: 10px;" visible="false">
+         <children>
+            <SVGPath fx:id="btnResizeSvg" content="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z" disable="true" fill="WHITE" layoutX="-194.0" layoutY="-225.0" scaleX="0.04" scaleY="0.04" />
+            <SVGPath fx:id="btnCloseSvg" content="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" disable="true" fill="WHITE" layoutX="518.0" layoutY="-241.0" scaleX="0.04" scaleY="0.04" visible="false" />
+            <JFXButton fx:id="btnClose" layoutX="695.0" layoutY="2.0" onMouseClicked="#btnCloseOnClicked" prefHeight="31.0" prefWidth="31.0" style="-fx-background-radius: 50%;" text=" " visible="false" />
+            <JFXButton fx:id="btnResize" layoutX="15.0" layoutY="-1.0" onMouseClicked="#btnResizeOnClicked" prefHeight="10.0" prefWidth="31.0" style="-fx-background-radius: 50%;" text=" " />
+         </children>
+      </Pane>
+      <Pane fx:id="loginPane" layoutY="52.0" prefHeight="767.0" prefWidth="762.0" style="-fx-background-color: #F9F5F6;">
          <children>
             <TextField fx:id="txtLogin" layoutX="288.0" layoutY="471.0" onAction="#txtLoginOnAction" />
             <Button fx:id="btnLogin" layoutX="349.0" layoutY="517.0" mnemonicParsing="false" onAction="#btnLoginOnAction" text="Button" />
+         </children>
+      </Pane>
+      <Pane fx:id="notificationPane" layoutX="10.0" layoutY="45.0" prefHeight="52.0" prefWidth="264.0" style="-fx-background-color: #00425A; -fx-background-radius: 7;">
+         <children>
+            <SVGPath fx:id="svgBell" content="M224 0c-17.7 0-32 14.3-32 32V49.9C119.5 61.4 64 124.2 64 200v33.4c0 45.4-15.5 89.5-43.8 124.9L5.3 377c-5.8 7.2-6.9 17.1-2.9 25.4S14.8 416 24 416H424c9.2 0 17.6-5.3 21.6-13.6s2.9-18.2-2.9-25.4l-14.9-18.6C399.5 322.9 384 278.8 384 233.4V200c0-75.8-55.5-138.6-128-150.1V32c0-17.7-14.3-32-32-32zm0 96h8c57.4 0 104 46.6 104 104v33.4c0 47.9 13.9 94.6 39.7 134.6H72.3C98.1 328 112 281.3 112 233.4V200c0-57.4 46.6-104 104-104h8zm64 352H224 160c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7s18.7-28.3 18.7-45.3z" fill="WHITE" layoutX="-175.0" layoutY="-229.0" rotate="25.0" scaleX="0.06" scaleY="0.06" />
+            <Label fx:id="lblNotiCount" layoutX="82.0" layoutY="15.0" prefHeight="27.0" style="-fx-background-color: #efefef; -fx-background-radius: 50;" textFill="#00425a">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
