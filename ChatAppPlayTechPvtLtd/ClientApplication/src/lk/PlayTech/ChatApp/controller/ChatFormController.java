@@ -21,19 +21,31 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.scene.transform.Rotate;
 import javafx.stage.FileChooser;
+import lk.PlayTech.ChatApp.ChatApplication;
 
 public class ChatFormController implements Initializable {
 
     public TextField txtLogin;
     public Button btnLogin;
     public Pane loginPane;
+    public SVGPath btnResizeSvg;
+    public SVGPath btnCloseSvg;
+    public JFXButton btnResize;
+    public JFXButton btnClose;
+    public AnchorPane mainPain;
+    public Pane navPane;
+    public Pane notificationPane;
     @FXML
     private ResourceBundle resources;
 
@@ -271,34 +283,38 @@ public class ChatFormController implements Initializable {
 
     @FXML
     void btnSendOnClick(MouseEvent event) throws Exception {
-        String msg=txtMsg.getText();
+        if (!txtMsg.getText().isEmpty()){
+            String msg=txtMsg.getText();
 
 
-        // Send the data type
-        dataOutputStream.writeUTF("TEXT");
-        dataOutputStream.flush();
+            // Send the data type
+            dataOutputStream.writeUTF("TEXT");
+            dataOutputStream.flush();
 
-        // Send the message
-        dataOutputStream.writeUTF(msg);
-        dataOutputStream.flush();
+            // Send the message
+            dataOutputStream.writeUTF(msg);
+            dataOutputStream.flush();
 
-        if (!msg.isEmpty()){
-            HBox hBox=new HBox();
-            hBox.setAlignment(Pos.CENTER_RIGHT);
-            hBox.setPadding(new Insets(5,5,5,10));
+            if (!msg.isEmpty()){
+                HBox hBox=new HBox();
+                hBox.setAlignment(Pos.CENTER_RIGHT);
+                hBox.setPadding(new Insets(5,5,5,10));
 
 
-            Text text=new Text(msg);
-            TextFlow textFlow=new TextFlow(text);
+                Text text=new Text(msg);
+                TextFlow textFlow=new TextFlow(text);
 
-            textFlow.setStyle("-fx-background-color: #79E0EE;-fx-background-radius:20px");
+                textFlow.setStyle("-fx-background-color: #79E0EE;-fx-background-radius:20px");
 
-            textFlow.setPadding(new Insets(5,10,5,10));
-            textFlow.setMaxWidth(400);
+                textFlow.setPadding(new Insets(5,10,5,10));
+                textFlow.setMaxWidth(400);
 
-            hBox.getChildren().add(textFlow);
-            msgBox.getChildren().add(hBox);
-            txtMsg.clear();
+                hBox.getChildren().add(textFlow);
+                msgBox.getChildren().add(hBox);
+                txtMsg.clear();
+            }
+        }else {
+            txtMsg.requestFocus();
         }
     }
 
@@ -317,6 +333,40 @@ public class ChatFormController implements Initializable {
         loginPane.setVisible(false);
         dataOutputStream.writeUTF("#AA77FF`"+txtLogin.getText());
         dataOutputStream.flush();
+        btnClose.setVisible(true);
+        btnCloseSvg.setVisible(true);
+        navPane.setVisible(true);
+    }
+
+    public void btnCloseOnClicked(MouseEvent mouseEvent) throws IOException {
+        socket.close();
+        loginPane.setVisible(false);
+    }
+
+    public void btnResizeOnClicked(MouseEvent mouseEvent) {
+
+        String arrowUp="M201.4 137.4c12.5-12.5 32.8-12.5 45.3 0l160 160c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L224 205.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l160-160z";
+        String arrowDown="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z";
+
+        if (btnResizeSvg.getContent().equals(arrowUp)){
+            btnResizeSvg.setContent(arrowDown);
+            //Changing the size of the anchor pane
+            ChatApplication.stage.setHeight(150);
+            ChatApplication.stage.setWidth(300);
+            navPane.setPrefWidth(270);
+            notificationPane.setVisible(true);
+
+
+        } else if (btnResizeSvg.getContent().equals(arrowDown)){
+            btnResizeSvg.setContent(arrowUp);
+            /*mainPain.setPrefWidth(750);
+            mainPain.setPrefHeight(820);*/
+            ChatApplication.stage.setHeight(860);
+            ChatApplication.stage.setWidth(775);
+            navPane.setPrefWidth(734);
+            notificationPane.setVisible(false);
+        }
+
     }
 }
 
