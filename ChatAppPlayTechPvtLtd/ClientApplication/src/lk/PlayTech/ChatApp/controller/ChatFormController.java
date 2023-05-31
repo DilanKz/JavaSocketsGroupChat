@@ -73,19 +73,20 @@ public class ChatFormController implements Initializable {
     @FXML
     private Button btnSend;
 
-    Socket socket;
-    DataInputStream dataInputStream;
-    DataOutputStream dataOutputStream;
-    String imageFilePath;
-    int notificationCount=0;
+    private Socket socket;
+    private DataInputStream dataInputStream;
+    private DataOutputStream dataOutputStream;
+    private String imageFilePath;
+    private int notificationCount=0;
+    private boolean isMinimized = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setHeight();
-        setNotificationCount();
         new Thread(() -> {
             try {
 
+                //making the remote socket
                 socket = new Socket("localhost", 3000);
 
                 dataInputStream = new DataInputStream(socket.getInputStream());
@@ -100,19 +101,35 @@ public class ChatFormController implements Initializable {
     }
 
     void setNotificationCount(){
-        if (notificationCount!=0){
-            svgBell.setVisible(true);
-            lblNotiCount.setText(" "+notificationCount+" ");
-        }else {
-            svgBell.setVisible(false);
-            lblNotiCount.setText("");
-        }
+        Platform.runLater(() -> {
+            if (notificationCount!=0){
+                svgBell.setVisible(true);
+                lblNotiCount.setVisible(true);
+                lblNotiCount.setText(" "+notificationCount+" ");
+            }else {
+                lblNotiCount.setVisible(false);
+                svgBell.setVisible(false);
+                lblNotiCount.setText("");
+            }
+        });
     }
 
 
     void dataFilter(){
         try {
             while (true) {
+
+                //updating notifications
+
+                if (isMinimized){
+                    setNotificationCount();
+                }else {
+                    svgBell.setVisible(false);
+                    lblNotiCount.setVisible(false);
+                }
+
+                //reading messages
+                //checking the data type
                 String dataType = dataInputStream.readUTF();
                 if (dataType.equals("IMAGE")) {
                     notificationCount++;
@@ -366,24 +383,39 @@ public class ChatFormController implements Initializable {
         String arrowDown="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z";
 
         if (btnResizeSvg.getContent().equals(arrowUp)){
-            notificationCount=10;
+            //changing the notification count to zero to start over again
+            notificationCount=0;
+            isMinimized=true;
+
+            //changing the arrow head of the resize button
             btnResizeSvg.setContent(arrowDown);
+
             //Changing the size of the anchor pane
             ChatApplication.stage.setHeight(150);
             ChatApplication.stage.setWidth(300);
             navPane.setPrefWidth(270);
+
+            //Showing the notification pane
             notificationPane.setVisible(true);
+
+            //Hiding the message body
+            msgBodyPane.setVisible(false);
 
 
         } else if (btnResizeSvg.getContent().equals(arrowDown)){
-            notificationCount=10;
+            //changing the arrow head of the resize button
             btnResizeSvg.setContent(arrowUp);
-            /*mainPain.setPrefWidth(750);
-            mainPain.setPrefHeight(820);*/
+
+            //Changing the size of the anchor pane
             ChatApplication.stage.setHeight(860);
             ChatApplication.stage.setWidth(775);
             navPane.setPrefWidth(734);
+
+            //Hiding the message body
             notificationPane.setVisible(false);
+
+            //Showing the message body
+            msgBodyPane.setVisible(false);
         }
 
     }
