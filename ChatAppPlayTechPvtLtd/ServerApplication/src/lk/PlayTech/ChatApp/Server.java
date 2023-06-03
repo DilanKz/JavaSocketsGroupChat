@@ -20,7 +20,7 @@ public class Server {
             ServerSocket serverSocket = new ServerSocket(port);
             System.out.println("Server started. Listening on port " + port);
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 15; i++) {
                 Socket clientSocket = serverSocket.accept();
 
                 DataInputStream dataInputStream = new DataInputStream(clientSocket.getInputStream());
@@ -30,6 +30,7 @@ public class Server {
                 MultiClientHandler clientHandler = new MultiClientHandler(clientSocket,clientName);
                 clients.add(clientHandler);
                 clientHandler.start();
+                System.out.println("Client connected: " + clientName);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());

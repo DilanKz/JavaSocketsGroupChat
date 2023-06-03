@@ -36,6 +36,16 @@
             <JFXButton fx:id="btnResize" layoutX="15.0" layoutY="-1.0" onMouseClicked="#btnResizeOnClicked" prefHeight="10.0" prefWidth="31.0" style="-fx-background-radius: 50%;" text=" " />
          </children>
       </Pane>
+      <Pane fx:id="emojiPane" layoutX="40.0" layoutY="607.0" prefHeight="127.0" prefWidth="151.0" style="-fx-background-color: #F9F5F6; -fx-border-color: black; -fx-border-radius: 10px; -fx-background-radius: 10px;" visible="false">
+         <children>
+            <Button fx:id="btnEmoji1" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnEmojisOnAction" prefHeight="31.0" prefWidth="37.0" style="-fx-background-color: rgba(0,66,90,0);" />
+            <Button fx:id="btnEmoji2" layoutX="55.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnEmojisOnAction" prefHeight="31.0" prefWidth="37.0" style="-fx-background-color: rgba(0,66,90,0);" />
+            <Button fx:id="btnEmoji3" layoutX="106.0" layoutY="14.0" mnemonicParsing="false" onAction="#btnEmojisOnAction" prefHeight="31.0" prefWidth="37.0" style="-fx-background-color: rgba(0,66,90,0);" />
+            <Button fx:id="btnEmoji6" layoutX="106.0" layoutY="64.0" mnemonicParsing="false" onAction="#btnEmojisOnAction" prefHeight="31.0" prefWidth="37.0" style="-fx-background-color: rgba(0,66,90,0);" />
+            <Button fx:id="btnEmoji5" layoutX="55.0" layoutY="64.0" mnemonicParsing="false" onAction="#btnEmojisOnAction" prefHeight="31.0" prefWidth="37.0" style="-fx-background-color: rgba(0,66,90,0);" />
+            <Button fx:id="btnEmoji4" layoutX="14.0" layoutY="64.0" mnemonicParsing="false" onAction="#btnEmojisOnAction" prefHeight="31.0" prefWidth="37.0" style="-fx-background-color: rgba(0,66,90,0);" />
+         </children>
+      </Pane>
       <Pane fx:id="loginPane" layoutY="52.0" prefHeight="767.0" prefWidth="762.0" style="-fx-background-color: #F9F5F6;">
          <children>
             <TextField fx:id="txtLogin" layoutX="288.0" layoutY="471.0" onAction="#txtLoginOnAction" />

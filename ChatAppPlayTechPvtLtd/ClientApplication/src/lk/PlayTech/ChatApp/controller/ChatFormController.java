@@ -49,6 +49,14 @@ public class ChatFormController implements Initializable {
     public Pane notificationPane;
     public SVGPath svgBell;
     public Label lblNotiCount;
+    public Pane emojiPane;
+    public Button btnEmoji1;
+    public Button btnEmoji2;
+    public Button btnEmoji3;
+    public Button btnEmoji4;
+    public Button btnEmoji5;
+    public Button btnEmoji6;
+
     @FXML
     private ResourceBundle resources;
 
@@ -79,9 +87,11 @@ public class ChatFormController implements Initializable {
     private String imageFilePath;
     private int notificationCount=0;
     private boolean isMinimized = false;
+    private boolean paneVisible= false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setEmojiText();
         setHeight();
         new Thread(() -> {
             try {
@@ -112,6 +122,15 @@ public class ChatFormController implements Initializable {
                 lblNotiCount.setText("");
             }
         });
+    }
+
+    void setEmojiText(){
+        btnEmoji1.setText("\uD83D\uDE00");
+        btnEmoji2.setText("\uD83E\uDD14");
+        btnEmoji3.setText("\uD83C\uDF89");
+        btnEmoji4.setText("\uD83D\uDE02");
+        btnEmoji5.setText("\uD83D\uDE0D");
+        btnEmoji6.setText("\uD83C\uDF1F");
     }
 
 
@@ -265,7 +284,8 @@ public class ChatFormController implements Initializable {
 
     @FXML
     void btnEmojiOnClick(MouseEvent event) {
-
+        paneVisible = !paneVisible;
+        emojiPane.setVisible(paneVisible);
     }
 
     @FXML
@@ -415,9 +435,17 @@ public class ChatFormController implements Initializable {
             notificationPane.setVisible(false);
 
             //Showing the message body
-            msgBodyPane.setVisible(false);
+            msgBodyPane.setVisible(true);
         }
 
+    }
+
+    public void btnEmojisOnAction(ActionEvent actionEvent) {
+        Button clickedButton = (Button) actionEvent.getSource();
+        String buttonText = clickedButton.getText();
+        txtMsg.appendText(buttonText);
+        emojiPane.setVisible(false);
+        paneVisible=false;
     }
 }
 

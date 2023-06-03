@@ -20,8 +20,6 @@ public class MultiClientHandler extends Thread{
             dataOutputStream=new DataOutputStream(clientSocket.getOutputStream());
             DataInputStream dataInputStream = new DataInputStream(clientSocket.getInputStream());
 
-            BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(System.in));
-
             while (true){
 
                 String dataType = dataInputStream.readUTF();
