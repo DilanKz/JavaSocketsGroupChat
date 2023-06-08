@@ -20,12 +20,11 @@ public class Server {
             ServerSocket serverSocket = new ServerSocket(port);
             System.out.println("Server started. Listening on port " + port);
 
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 2; i++) {
                 Socket clientSocket = serverSocket.accept();
 
                 DataInputStream dataInputStream = new DataInputStream(clientSocket.getInputStream());
                 String clientName = dataInputStream.readUTF();
-                System.out.println("Client connected: " + clientName);
 
                 MultiClientHandler clientHandler = new MultiClientHandler(clientSocket,clientName);
                 clients.add(clientHandler);

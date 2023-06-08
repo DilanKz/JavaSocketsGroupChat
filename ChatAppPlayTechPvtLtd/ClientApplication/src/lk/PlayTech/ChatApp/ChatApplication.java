@@ -23,8 +23,8 @@ public class ChatApplication extends Application {
         Scene scene =new Scene(root);
 
         primaryStage.setScene(scene);
-        primaryStage.initStyle(StageStyle.DECORATED);
-//        primaryStage.setResizable(false);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setResizable(false);
         stage=primaryStage;
         stage.show();
     }

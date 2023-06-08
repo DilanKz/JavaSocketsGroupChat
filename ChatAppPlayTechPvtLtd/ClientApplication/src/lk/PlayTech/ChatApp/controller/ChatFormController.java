@@ -33,6 +33,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.scene.transform.Rotate;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import lk.PlayTech.ChatApp.ChatApplication;
 
 public class ChatFormController implements Initializable {
@@ -394,7 +395,7 @@ public class ChatFormController implements Initializable {
 
     public void btnCloseOnClicked(MouseEvent mouseEvent) throws IOException {
         socket.close();
-        loginPane.setVisible(false);
+        System.exit(0);
     }
 
     public void btnResizeOnClicked(MouseEvent mouseEvent) {
@@ -411,8 +412,8 @@ public class ChatFormController implements Initializable {
             btnResizeSvg.setContent(arrowDown);
 
             //Changing the size of the anchor pane
-            ChatApplication.stage.setHeight(150);
-            ChatApplication.stage.setWidth(300);
+            ChatApplication.stage.setHeight(120);
+            ChatApplication.stage.setWidth(285);
             navPane.setPrefWidth(270);
 
             //Showing the notification pane
@@ -427,9 +428,9 @@ public class ChatFormController implements Initializable {
             btnResizeSvg.setContent(arrowUp);
 
             //Changing the size of the anchor pane
-            ChatApplication.stage.setHeight(860);
-            ChatApplication.stage.setWidth(775);
-            navPane.setPrefWidth(734);
+            ChatApplication.stage.setHeight(820);
+            ChatApplication.stage.setWidth(750);
+            navPane.setPrefWidth(737);
 
             //Hiding the message body
             notificationPane.setVisible(false);
@@ -446,6 +447,21 @@ public class ChatFormController implements Initializable {
         txtMsg.appendText(buttonText);
         emojiPane.setVisible(false);
         paneVisible=false;
+    }
+
+    private double xOffset = 0;
+    private double yOffset = 0;
+
+    public void onMouseDragged(MouseEvent mouseEvent) {
+        Stage primaryStage = (Stage) navPane.getScene().getWindow();
+        primaryStage.setX(mouseEvent.getScreenX() - xOffset);
+        primaryStage.setY(mouseEvent.getScreenY() - yOffset);
+
+    }
+
+    public void onMousePressed(MouseEvent mouseEvent) {
+        xOffset = mouseEvent.getSceneX();
+        yOffset = mouseEvent.getSceneY();
     }
 }
 
