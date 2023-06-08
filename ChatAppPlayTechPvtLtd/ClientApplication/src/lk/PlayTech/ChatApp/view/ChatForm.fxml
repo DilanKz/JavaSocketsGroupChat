@@ -50,7 +50,7 @@
       </Pane>
       <Pane fx:id="loginPane" layoutY="-1.0" prefHeight="820.0" prefWidth="762.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <TextField fx:id="txtLogin" layoutX="150.0" layoutY="539.0" onAction="#txtLoginOnAction" prefHeight="39.0" prefWidth="462.0" promptText="User Name" style="-fx-background-color: #D8E9A8;">
+            <TextField fx:id="txtLogin" layoutX="150.0" layoutY="539.0" onAction="#txtLoginOnAction" prefHeight="39.0" prefWidth="462.0" promptText="User Name" style="-fx-background-color: #D8E9A8; -fx-text-fill: #857f7f;">
                <font>
                   <Font size="14.0" />
                </font></TextField>
