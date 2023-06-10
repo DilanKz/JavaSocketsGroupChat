@@ -75,10 +75,13 @@ public class MultiClientHandler extends Thread{
         }
     }
 
-    public void sendImages(File file){
+    public void sendImages(File file,String name){
         try {
             //Setting the data type to the clients
             dataOutputStream.writeUTF("IMAGE");
+            dataOutputStream.flush();
+
+            dataOutputStream.writeUTF(name);
             dataOutputStream.flush();
 
 

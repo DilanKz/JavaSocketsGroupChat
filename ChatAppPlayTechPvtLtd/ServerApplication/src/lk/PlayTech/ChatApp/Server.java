@@ -13,8 +13,12 @@ import java.util.List;
 public class Server {
 
     private static List<MultiClientHandler> clients = new ArrayList<>();
+
+    public Server(){
+
+    }
     public static void main(String[] args) {
-        final int port = 3000; // Specify the port number you want to use
+        final int port = 3000;
 
         try {
             ServerSocket serverSocket = new ServerSocket(port);
@@ -47,7 +51,7 @@ public class Server {
     public static void broadcastImage(String name, File file) {
         for (MultiClientHandler client : clients) {
             if (!client.userName.equals(name)){
-                client.sendImages(file);
+                client.sendImages(file,name);
             }
         }
     }

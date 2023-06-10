@@ -189,6 +189,9 @@ public class ChatFormController implements Initializable {
 
     void receiveImages() {
         try {
+
+            String name= dataInputStream.readUTF();
+
             Random random = new Random();
             String randomNumber = String.valueOf(random.nextInt(1000));
 
@@ -219,7 +222,7 @@ public class ChatFormController implements Initializable {
                 if (isImageReceived) {
                     System.out.println("Image received");
                     System.out.println(receivedImage.getAbsolutePath());
-                    storeAndShowImage(receivedImage.getPath(), receivedImage);
+                    storeAndShowImage(receivedImage.getPath(), receivedImage,name);
                     imageFilePath = "noPath";
                 } else {
                     System.out.println("No image received");
@@ -258,10 +261,13 @@ public class ChatFormController implements Initializable {
         });
     }
 
-    void storeAndShowImage(String path, File receivedImage) {
+    void storeAndShowImage(String path, File receivedImage,String name) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
+
+                String[] parts=name.split("`");
+
                 ImageView imageView=new ImageView();
                 Image image = new Image(receivedImage.toURI().toString());
                 System.out.println(receivedImage.toURI().toString());
@@ -274,12 +280,13 @@ public class ChatFormController implements Initializable {
                 imageView.setLayoutX(5);
                 imageView.setLayoutY(5);
 
-                Text text=new Text("parts[1]");
+                Text text=new Text(parts[1]);
                 TextFlow textFlow=new TextFlow(text);
 
-                //textFlow.setStyle("-fx-background-color:"+parts[0]+" ;-fx-background-radius:20px");
+                textFlow.setStyle("-fx-background-color:"+parts[0]+" ;-fx-background-radius:20px");
                 textFlow.setPadding(new Insets(5,10,5,10));
                 textFlow.setMaxWidth(400);
+                textFlow.setMaxHeight(30);
 
                 hBox.getChildren().add(textFlow);
 
@@ -430,7 +437,7 @@ public class ChatFormController implements Initializable {
     @FXML
     void btnLoginOnAction(ActionEvent actionEvent) throws Exception{
         loginPane.setVisible(false);
-        dataOutputStream.writeUTF("#AA77FF`"+txtLogin.getText());
+        dataOutputStream.writeUTF("#4E9F3D`"+txtLogin.getText());
         dataOutputStream.flush();
         btnClose.setVisible(true);
         btnCloseSvg.setVisible(true);
