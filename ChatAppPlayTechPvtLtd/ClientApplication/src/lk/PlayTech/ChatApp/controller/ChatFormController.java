@@ -12,10 +12,12 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -192,7 +194,7 @@ public class ChatFormController implements Initializable {
 
 
             String projectDir = System.getProperty("user.dir");
-            imageFilePath=projectDir+"\\ClientApplication\\src\\lk\\PlayTech\\ChatApp\\data\\images" + randomNumber + ".jpg";
+            imageFilePath=projectDir+"\\ClientApplication\\src\\lk\\PlayTech\\ChatApp\\data\\images\\" + randomNumber + ".jpg";
 
             File receivedImage = new File(imageFilePath);
             boolean isImageReceived = false;
@@ -248,7 +250,6 @@ public class ChatFormController implements Initializable {
 
                 textFlow.setStyle("-fx-background-color:"+parts[0]+" ;-fx-background-radius:20px");
                 textFlow.setPadding(new Insets(5,10,5,10));
-                //text.setFill(Color.color(0.934,0.945,0.996));
                 textFlow.setMaxWidth(400);
 
                 hBox.getChildren().add(textFlow);
@@ -273,14 +274,54 @@ public class ChatFormController implements Initializable {
                 imageView.setLayoutX(5);
                 imageView.setLayoutY(5);
 
+                Text text=new Text("parts[1]");
+                TextFlow textFlow=new TextFlow(text);
+
+                //textFlow.setStyle("-fx-background-color:"+parts[0]+" ;-fx-background-radius:20px");
+                textFlow.setPadding(new Insets(5,10,5,10));
+                textFlow.setMaxWidth(400);
+
+                hBox.getChildren().add(textFlow);
+
                 hBox.setAlignment(Pos.CENTER_LEFT);
                 hBox.setPadding(new Insets(5,5,10,0));
                 hBox.getChildren().add(imageView);
                 msgBox.getChildren().add(hBox);
 
                 imageFilePath="noPath";
+
+                imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        // Open the image in another stage or perform any other action
+                        openImageInAnotherStage(receivedImage);
+                    }
+                });
+
             }
         });
+    }
+
+    private void openImageInAnotherStage(File file) {
+        Stage stage = new Stage();
+        ImageView imageView = new ImageView();
+        Image image = new Image(file.toURI().toString());
+        imageView.setImage(image);
+
+        double aspectRatio = image.getWidth() / image.getHeight();
+        double targetHeight = 800;
+        double targetWidth = targetHeight * aspectRatio;
+
+        imageView.setFitWidth(targetWidth);
+        imageView.setFitHeight(targetHeight);
+
+        VBox vbox = new VBox(imageView);
+        vbox.setAlignment(Pos.CENTER);
+
+        Scene scene = new Scene(vbox);
+        stage.setScene(scene);
+        stage.setTitle("Image Viewer");
+        stage.show();
     }
 
     @FXML
@@ -293,6 +334,9 @@ public class ChatFormController implements Initializable {
     void btnFilesOnClick(MouseEvent event) throws Exception{
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select Photo");
+
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+
         File file = fileChooser.showOpenDialog(null);
         ImageView imageView=new ImageView();
 
